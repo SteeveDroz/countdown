@@ -22,7 +22,7 @@ const init = data => {
     data.endTime = Date.now()
     data.start = false
 
-    data.canvas.width = data.canvas.height = 300
+    data.canvas.width = data.canvas.height = 500
 }
 
 const update = data => {

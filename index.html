@@ -5,14 +5,21 @@
     <meta charset="utf-8">
     <title>Countdown</title>
     <script src="countdown.js" defer></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 
 <body>
-    <h1>Countdown</h1>
-    <canvas id="countdown"></canvas>
-    <button id="reset">Reset</button>
-    <input id="hours" placeholder="HH">:<input id="minutes" placeholder="MM">:<input id="seconds" placeholder="SS">
-    <button id="start">Start</button>
+    <main>
+        <h1>Countdown</h1>
+        <canvas id="countdown"></canvas>
+        <menu>
+            <button id="reset">Reset</button>
+            <div class="group">
+                <input id="hours" placeholder="HH" autofocus>:<input id="minutes" placeholder="MM">:<input id="seconds" placeholder="SS">
+            </div>
+            <button id="start">Start</button>
+        </menu>
+    </main>
 </body>
 
 </html>
