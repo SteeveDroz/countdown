@@ -9,6 +9,10 @@ const load = () => {
         update(data)
         render(data)
     }, 1000 / 60)
+
+    document.querySelector('#start').onclick = event => {
+        start(data)
+    }
 }
 
 const init = data => {
@@ -49,9 +53,16 @@ const render = data => {
     ctx.fill()
 }
 
+const start = data => {
+    const hours = document.querySelector('#hours').value
+    const minutes = document.querySelector('#minutes').value
+    const seconds = document.querySelector('#seconds').value
+
+    data.endTime = Date.now() + 3600000 * hours + 60000 * minutes + 1000 * seconds
+}
+
 const timeToAngle = endTime => {
     const difference = endTime - Date.now()
-    console.log(difference);
     return difference / 3600000 * 2 * Math.PI
 }
 
