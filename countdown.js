@@ -22,7 +22,18 @@ const init = data => {
     data.canvas.width = data.canvas.height = 300
 }
 
-const update = data => {}
-const render = data => {}
+const update = data => {
+}
+
+const render = data => {
+    const {
+        canvas,
+        ctx
+    } = data
+
+    ctx.fillStyle = '#eee'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+}
+
 
 load()
