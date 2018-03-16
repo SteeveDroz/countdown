@@ -41,8 +41,23 @@ const render = data => {
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     if (start) {
-        ctx.fillStyle = startAngle > 0 ? 'rgba(0, 0, 255, 0.5)' : 'rgba(255, 0, 0, 0.5)'
-        let angle = startAngle
+        let angle = Math.abs(startAngle)
+
+        ctx.save()
+
+        if (startAngle > 0) {
+            ctx.translate(canvas.width / 2, canvas.height / 2)
+            ctx.rotate(-Math.PI / 2)
+            ctx.scale(1, -1)
+            ctx.translate(-canvas.width / 2, -canvas.height / 2)
+            ctx.fillStyle = 'rgba(0, 0, 255, 0.5)'
+        } else {
+            ctx.translate(canvas.width / 2, canvas.height / 2)
+            ctx.rotate(-Math.PI / 2)
+            ctx.translate(-canvas.width / 2, -canvas.height / 2)
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
+        }
+
         while (angle > 2 * Math.PI) {
             ctx.beginPath()
             ctx.arc(canvas.width / 2, canvas.width / 2, canvas.width / 2, 0, 2 * Math.PI)
@@ -50,10 +65,13 @@ const render = data => {
 
             angle -= 2 * Math.PI
         }
+
         ctx.beginPath()
-        ctx.arc(canvas.width / 2, canvas.width / 2, canvas.width / 2, -Math.PI / 2 - angle, -Math.PI / 2)
+        ctx.arc(canvas.width / 2, canvas.width / 2, canvas.width / 2, 0, angle)
         ctx.lineTo(canvas.width / 2, canvas.height / 2)
         ctx.fill()
+
+        ctx.restore()
     }
 }
 
