@@ -20,6 +20,7 @@ const init = data => {
     data.ctx = data.canvas.getContext('2d')
 
     data.endTime = Date.now()
+    data.start = false
 
     data.canvas.width = data.canvas.height = 300
 }
@@ -32,33 +33,41 @@ const render = data => {
     const {
         canvas,
         ctx,
-        startAngle
+        startAngle,
+        start
     } = data
 
-    ctx.fillStyle = '#eee'
+    ctx.fillStyle = '#fff'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
-    let angle = startAngle
-    while (angle > 2 * Math.PI) {
-        ctx.beginPath()
-        ctx.arc(canvas.width / 2, canvas.width / 2, canvas.width / 2, 0, 2 * Math.PI)
-        ctx.fill()
+    if (start) {
+        ctx.fillStyle = startAngle > 0 ? 'rgba(0, 0, 255, 0.5)' : 'rgba(255, 0, 0, 0.5)'
+        let angle = startAngle
+        while (angle > 2 * Math.PI) {
+            ctx.beginPath()
+            ctx.arc(canvas.width / 2, canvas.width / 2, canvas.width / 2, 0, 2 * Math.PI)
+            ctx.fill()
 
-        angle -= 2 * Math.PI
+            angle -= 2 * Math.PI
+        }
+        ctx.beginPath()
+        ctx.arc(canvas.width / 2, canvas.width / 2, canvas.width / 2, -Math.PI / 2 - angle, -Math.PI / 2)
+        ctx.lineTo(canvas.width / 2, canvas.height / 2)
+        ctx.fill()
     }
-    ctx.beginPath()
-    ctx.arc(canvas.width / 2, canvas.width / 2, canvas.width / 2, -Math.PI / 2 - angle, -Math.PI / 2)
-    ctx.lineTo(canvas.width / 2, canvas.height / 2)
-    ctx.fill()
 }
 
 const start = data => {
-    const hours = document.querySelector('#hours').value
-    const minutes = document.querySelector('#minutes').value
-    const seconds = document.querySelector('#seconds').value
+    let hours = document.querySelector('#hours').value
+    let minutes = document.querySelector('#minutes').value
+    let seconds = document.querySelector('#seconds').value
+    if (hours.trim() == '') hours = 0
+    if (minutes.trim() == '') minutes = 0
+    if (seconds.trim() == '') seconds = 0
 
     data.endTime = Date.now() + 3600000 * hours + 60000 * minutes + 1000 * seconds
+
+    data.start = true
 }
 
 const timeToAngle = endTime => {
