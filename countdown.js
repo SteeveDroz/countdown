@@ -13,6 +13,10 @@ const load = () => {
     document.querySelector('#start').onclick = event => {
         start(data)
     }
+
+    document.querySelector('#reset').onclick = event => {
+        reset(data)
+    }
 }
 
 const init = data => {
@@ -21,13 +25,17 @@ const init = data => {
 
     data.endTime = Date.now()
     data.start = false
+    data.reset = false
 
     data.canvas.width = data.canvas.height = 500
 }
 
 const update = data => {
-    if (data.start) {
+    if (data.start || data.reset) {
         data.startAngle = timeToAngle(data.endTime)
+        data.reset = false
+    }
+    if (data.start) {
         let difference = Math.abs(Math.floor((data.endTime - Date.now()) / 1000))
         let seconds = pad(difference % 60, '00')
         difference = Math.floor(difference / 60)
@@ -124,6 +132,16 @@ const start = data => {
         button.innerText = 'Pause'
     }
     data.start ^= true
+}
+
+const reset = data => {
+    data.endTime = Date.now()
+    data.start = false
+    document.querySelector('#hours').value = ''
+    document.querySelector('#minutes').value = ''
+    document.querySelector('#seconds').value = ''
+    document.querySelector('#start').value = 'Start'
+    data.reset = true
 }
 
 const timeToAngle = endTime => {
