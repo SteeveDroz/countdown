@@ -8,7 +8,7 @@ const load = () => {
     setInterval(() => {
         update(data)
         render(data)
-    }, 1000 / 60)
+    }, 100)
 
     document.querySelector('#start').onclick = event => {
         start(data)
