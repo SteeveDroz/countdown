@@ -17,6 +17,8 @@ const load = () => {
     document.querySelector('#reset').onclick = event => {
         reset(data)
     }
+
+    document.querySelector('#license').onclick = showLicense
 }
 
 const init = data => {
@@ -142,6 +144,33 @@ const reset = data => {
     document.querySelector('#seconds').value = ''
     document.querySelector('#start').innerText = 'Start'
     data.reset = true
+}
+
+const showLicense = () => {
+    const mask = document.createElement('div')
+    mask.style = 'position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(0, 0, 0, 0.5);z-index:1;'
+    mask.onclick = () => {
+        document.body.removeChild(mask)
+        document.body.removeChild(message)
+    }
+    document.body.appendChild(mask)
+
+    const message = document.createElement('div')
+    message.style = 'position:fixed;left:50%;top:50%;transform:translate(-50%, -50%);z-index:2;background:#fff;padding:10px;border-radius:10px;overflow:auto;max-width:600px;max-height:500px;'
+    message.innerText = 'License unavailable, please report as a bug.'
+    message.onclick = () => {
+        document.body.removeChild(mask)
+        document.body.removeChild(message)
+    }
+
+    const ajax = new XMLHttpRequest()
+    ajax.open('GET', 'LICENSE')
+    ajax.onreadystatechange = () => {
+        console.log('AJAX');
+        message.innerText = ajax.responseText
+    }
+    ajax.send()
+    document.body.append(message)
 }
 
 const timeToAngle = endTime => {
