@@ -30,6 +30,7 @@ menu {
 
 #hours, #minutes, #seconds {
     width: 30px;
+    text-align: center;
 }
 
 footer {
