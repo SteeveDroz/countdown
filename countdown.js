@@ -140,7 +140,7 @@ const reset = data => {
     document.querySelector('#hours').value = ''
     document.querySelector('#minutes').value = ''
     document.querySelector('#seconds').value = ''
-    document.querySelector('#start').value = 'Start'
+    document.querySelector('#start').innerText = 'Start'
     data.reset = true
 }
 
