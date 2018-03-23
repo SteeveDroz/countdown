@@ -1,6 +1,6 @@
 # Countdown
 
-This software can be used as a visual timer. It was initially developped to display the time left before the end of an exam.
+This software can be used as a visual timer. It was initially developed to display the time left before the end of an exam.
 
 ## How to use
 
